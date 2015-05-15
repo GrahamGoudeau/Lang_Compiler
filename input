@@ -1,0 +1,21 @@
+let main : {void} -> {int}
+
+let print_hello : {char, int} -> {void}
+print_hello(x,y) =
+{
+    var = 'c';
+}
+
+let test : {void} -> {char}
+test(y) =
+{
+    return 5;
+}
+
+main() =
+{
+    c = 5;
+    c = c + 1;
+    c = b + c
+    return 5;
+}
