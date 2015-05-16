@@ -228,7 +228,7 @@ def mark_functions(func_map, tokenized):
                 token.label = Token_Label.Func_Id
         
 ''' example function declaration:
-        let foobar : (type1,type2,...) -> (return_type) 
+        let foobar : {type1,type2,...} -> {return_type}
     the following functions expect to see the above, and fail
     with sys.exit() if otherwise
 '''

@@ -1,0 +1,27 @@
+TOPLVL      :=      FUNCDEF | FUNCDECL | ""
+FUNCDEF     :=      fn_id = BLOCK TOPLVL
+FUNCDECL    :=      let fn_id : ( type* ) - > ( type ) TOPLVL
+BLOCK       :=      { STMTLST OPT_RETURN
+STMTLST     :=      id = EVAL ; STMTLST | }
+EVAL        :=      id EVAL | ""
+EVAL        :=      fn_id EVAL
+
+OPT_RETURN  :=      return RET_VAL ;
+RET_VAL     :=      id | ""
+                        
+IF          :=      if ( EVAL ) then BLOCK OPTELSE
+OPTELSE     :=      BLOCK | ""
+
+
+------------------------
+
+TOPLVL      :=      var_id = BLOCK
+BLOCK       :=      { STMTLST 
+
+STMTLST     :=        }
+                    | return var_id ; }
+                    | return fn_id ; }
+                    | return num ; }
+                    | var_id = EVAL ; STMTLST
+
+EVAL        :=      
