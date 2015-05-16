@@ -1,21 +1,8 @@
-TOPLVL      :=      FUNCDEF | FUNCDECL | ""
-FUNCDEF     :=      fn_id = BLOCK TOPLVL
-FUNCDECL    :=      let fn_id : ( type* ) - > ( type ) TOPLVL
-BLOCK       :=      { STMTLST OPT_RETURN
-STMTLST     :=      id = EVAL ; STMTLST | }
-EVAL        :=      id EVAL | ""
-EVAL        :=      fn_id EVAL
-
-OPT_RETURN  :=      return RET_VAL ;
-RET_VAL     :=      id | ""
-                        
-IF          :=      if ( EVAL ) then BLOCK OPTELSE
-OPTELSE     :=      BLOCK | ""
+A function definition must follow the grammar outlined below, starting
+with the TOPLVL production rule.
 
 
-------------------------
-
-TOPLVL      :=      var_id = BLOCK
+TOPLVL      :=      func_id = BLOCK
 BLOCK       :=      { STMTLST 
 
 STMTLST     :=        }
