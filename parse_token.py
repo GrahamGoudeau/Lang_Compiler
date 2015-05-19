@@ -66,13 +66,16 @@ def parse_statement_list(def_iter, function):
         close_curly = def_iter.next()
         expect_symbol(close_curly, '}')
     elif first_token.label == Token_Label.Var_Id:
-        parse_eval(first_token, def_iter, function)
-    elif first_token.label == Token_Lable.Fun_Id:
+        parse_eval(def_iter, function)
+    elif first_token.label == Token_Label.Func_Id:
         parse_freestanding_func(def_iter, function)
     else:
-        pass
-        print("uncaught case with " + token.symbol)
+        print("Error in expression on line " + str(first_token.line_num) + 
+            "; cannot begin expression with token '" + first_token.symbol + \
+            "'", file=sys.stderr)
         sys.exit()
+
+    return
 
 # expects the return value; 'return' has been consumed already
 def parse_return(def_iter, function):
@@ -80,11 +83,27 @@ def parse_return(def_iter, function):
     if value.label != Token_Label.Var_Id and \
             value.label != Token_Label.Func_Id and \
             value.label != Token_Label.Num:
-        print(get_label_str(value.label))
-        print("Error in return statement: return '" + \
+        print("Error in return statement: returning '" + \
                 value.symbol + "' on line " + str(value.line_num), \
                 file=sys.stderr)
         sys.exit()
+
+# parse an expression that can be evaluated
+def parse_eval(def_iter, function):
+    assignment = def_iter.next()
+
+    next_token = def_iter.next()
+    while next_token.symbol != DELIM and next_token.symbol != '}':
+        if next_token.label == Token_Label.Keyword:
+            print("On line " + str(next_token.line_num) + ", saw keyword " + \
+                "'" + next_token.symbol + "' in an expression", file=sys.stderr)
+            sys.exit()
+        next_token = def_iter.next()
+
+    expect_symbol(next_token, ';')
+    
+    parse_statement_list(def_iter, function)
+
 
 def expect_symbol(token, symbol):
     if token.symbol != symbol:

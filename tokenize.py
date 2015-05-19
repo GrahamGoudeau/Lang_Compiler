@@ -164,6 +164,7 @@ def make_function_map(token_iter, tokenized_arr):
     # ensures that if a func has 'void' as a paremter, it is the only param
     # also checks that each function has at least 1 parameter
     # fails with sys.exit() and a message if not
+    # (only checks declarations)
     check_params(func_map)
 
     # ensures that a return type exists, and the function 
@@ -183,6 +184,7 @@ def make_function_map(token_iter, tokenized_arr):
 
     return func_map
 
+# check the parameter types in the declarations
 def check_params(func_map):
     # check for void
     void = "void"

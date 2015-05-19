@@ -7,15 +7,15 @@ print_hello(x,y) =
 }
 
 let test : {void} -> {char}
-test(y) =
+test() =
 {
     return 5;
 }
 
-main() =
+main(x,y) =
 {
     c = 5;
     c = c + 1;
-    c = b + c
-    return 5;
+    c = b + c;
+    return
 }
